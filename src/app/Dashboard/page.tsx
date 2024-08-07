@@ -75,14 +75,16 @@ export default function Dashboard() {
                 {topics.map((topic, index) => (
                   <div key={index} className="w-[300px] flex-shrink-0 p-4 border-2 border-white bg-[#192734] rounded-lg shadow-md m-4">
                     <div className="flex items-start">
-                      <Image
-                        src={topic.img} // Ensure this path is correct and accessible
-                        alt={topic.topic}
-                        width={120}
-                        height={120}
-                        className="object-cover rounded-md mr-4"
-                      />
-                      <div className="flex-1">
+                      <div className="relative w-[120px] h-[120px]">
+                        <Image
+                          src={topic.img} // Ensure this path is correct and accessible
+                          alt={topic.topic}
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-md"
+                        />
+                      </div>
+                      <div className="flex-1 ml-4">
                         <h2 className="text-xl font-semibold text-white mb-2">{topic.topic}</h2>
                         <p className="text-sm text-white mb-4">{topic.summary}</p>
                       </div>
