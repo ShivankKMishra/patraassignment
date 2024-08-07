@@ -1,7 +1,7 @@
 "use client";
 
 import Link from 'next/link';
-import Image from 'next/image'; // Import the Image component
+import Image from 'next/image';
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import './page.css'; // Import the CSS file
 import { useState } from 'react';
@@ -39,7 +39,18 @@ export default function Login() {
   return (
     <div className="login-container">
       {/* Background Image */}
-      <div className="background-image"></div>
+      <div className="background-image-container">
+        <Image 
+          src="/AuthImages/mountbg.jpeg" 
+          alt="Background" 
+          fill 
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: 'cover' }}
+          className="background-image" 
+          loading="eager" // Ensures the image is loaded immediately
+          priority // Prioritizes the image for loading
+        />
+      </div>
 
       {/* Form Container */}
       <div className="form-container">

@@ -39,7 +39,18 @@ export default function Register() {
   return (
     <div className="register-container">
       {/* Background Image */}
-      <div className="background-image"></div>
+      <div className="background-image-container">
+        <Image 
+          src="/AuthImages/mountbg.jpeg" 
+          alt="Background" 
+          fill 
+          sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          style={{ objectFit: 'cover' }}
+          className="background-image" 
+          loading="eager" // Ensures the image is loaded immediately
+          priority // Prioritizes the image for loading
+        />
+      </div>
 
       {/* Form Container */}
       <div className="form-container">
@@ -87,7 +98,7 @@ export default function Register() {
                   className="w-full px-4 py-2 flex items-center justify-center space-x-2 text-white bg-[#192734] border-2 border-[#425568] rounded-md shadow-sm hover:bg-[#192734] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#425568]"
                 >
                   <EmailRoundedIcon />
-                  <span>Sign up with Email</span>
+                  <span>Sign Up with Email</span>
                 </button>
               </form>
             )}
