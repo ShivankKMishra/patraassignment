@@ -6,9 +6,9 @@ import './page.css'; // Import the CSS file
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { FormEvent } from 'react';
-import { auth, googleProvider, signInWithPopup, createUserWithEmailAndPassword } from '../../../Lib/firebase';
+import { auth, googleProvider, signInWithPopup, signInWithEmailAndPassword } from '../../../Lib/firebase';
 
-export default function Register() {
+export default function Login() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [showForm, setShowForm] = useState<boolean>(false); // State to control form visibility
@@ -23,48 +23,46 @@ export default function Register() {
     }
   };
 
-  const handleEmailSignUp = async (e: FormEvent<HTMLFormElement>) => {
+  const handleEmailSignIn = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (showForm) {
       try {
-        await createUserWithEmailAndPassword(auth, email, password);
-        router.push('/Dashboard'); // Adjust the path as needed
+        await signInWithEmailAndPassword(auth, email, password);
+        router.push('/dashboard'); // Adjust the path as needed
       } catch (error) {
-        console.error("Error signing up with email:", error);
+        console.error("Error signing in with email:", error);
       }
     }
   };
 
   return (
-    <div className="register-container">
+    <div className="login-container">
       {/* Background Image */}
       <div className="background-image"></div>
 
       {/* Form Container */}
       <div className="form-container">
-        <h3 className="text-white text-lg text-center tagline lg:text-xs">Journey to a trillion miles starts from here!!</h3>
+        <h3 className="text-white text-lg text-center tagline lg:text-xs">Welcome Back! Please login to continue.</h3>
         <div className="form-box">
-          <h2 className="text-2xl font-bold text-center text-white">Sign Up</h2>
-          <h5 className="flex justify-center pb-16">Choose a sign up method</h5>
+          <h2 className="text-2xl font-bold text-center text-white">Login</h2>
+          <h5 className="flex justify-center pb-16">Choose a login method</h5>
           <div className="space-y-6">
             <button
               onClick={handleGoogleSignIn}
               className="w-full px-4 py-2 flex items-center justify-center space-x-2 text-white bg-[#192734] border-2 border-[#425568] rounded-md shadow-sm hover:bg-[#192734] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#425568]"
             >
-              <img className="h-6 w-6" src="/Icon/google.svg" alt="Google icon"/> 
-              <span>Sign up with Google</span>
+              <img className="h-6 w-6" src="/Icon/google.svg" alt="Google icon"/>
+              <span>Login with Google</span>
             </button>
-            {!showForm && (
-              <button
-                onClick={() => setShowForm(true)}
-                className="w-full px-4 py-2 flex items-center justify-center space-x-2 text-white bg-[#192734] border-2 border-[#425568] rounded-md shadow-sm hover:bg-[#192734] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#425568]"
-              >
-                <EmailRoundedIcon />
-                <span>Sign up with Email</span>
-              </button>
-            )}
+            <button
+              onClick={() => setShowForm(true)}
+              className={`w-full px-4 py-2 flex items-center justify-center space-x-2 text-white bg-[#192734] border-2 border-[#425568] rounded-md shadow-sm hover:bg-[#192734] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#425568] ${showForm ? 'hidden' : ''}`}
+            >
+              <EmailRoundedIcon />
+              <span>Sign Up with Email</span>
+            </button>
             {showForm && (
-              <form onSubmit={handleEmailSignUp} className="space-y-6">
+              <form onSubmit={handleEmailSignIn} className="space-y-6">
                 <input
                   type="email"
                   value={email}
@@ -86,13 +84,13 @@ export default function Register() {
                   className="w-full px-4 py-2 flex items-center justify-center space-x-2 text-white bg-[#192734] border-2 border-[#425568] rounded-md shadow-sm hover:bg-[#192734] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#425568]"
                 >
                   <EmailRoundedIcon />
-                  <span>Sign up with Email</span>
+                  <span>Login with Email</span>
                 </button>
               </form>
             )}
           </div>
           <p className="text-sm pt-5 text-center text-gray-400">
-            Already have an account? <Link href="/Login" className="text-indigo-600 hover:text-indigo-500">Login</Link>
+            Don't have an account? <Link href="/Signup" className="text-indigo-600 hover:text-indigo-500">Sign Up</Link>
           </p>
         </div>
       </div>
