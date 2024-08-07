@@ -8,6 +8,8 @@ export default function Dashboard() {
   const [topics, setTopics] = useState<any[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchEndX, setTouchEndX] = useState(0);
   const itemWidth = 300; // Width of the component in pixels
 
   useEffect(() => {
@@ -33,6 +35,20 @@ export default function Dashboard() {
     setCurrentIndex((prevIndex) => (prevIndex - 1 + topics.length) % topics.length);
   };
 
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchStartX(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLDivElement>) => {
+    setTouchEndX(e.changedTouches[0].clientX);
+    const distance = touchStartX - touchEndX;
+    if (distance > 50) {
+      slideRight(); // Swipe left
+    } else if (distance < -50) {
+      slideLeft(); // Swipe right
+    }
+  };
+
   return (
     <>
       <Header />
@@ -45,7 +61,12 @@ export default function Dashboard() {
           >
             &lt;
           </button>
-          <div className="overflow-hidden w-full" ref={containerRef}>
+          <div
+            className="overflow-hidden w-full"
+            ref={containerRef}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
             {topics.length > 0 ? (
               <div
                 className="flex transition-transform duration-500 ease-in-out"
