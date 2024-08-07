@@ -1,6 +1,7 @@
 "use client";
 
 import Link from 'next/link';
+import Image from 'next/image'; // Import the Image component
 import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
 import './page.css'; // Import the CSS file
 import { useState } from 'react';
@@ -51,7 +52,7 @@ export default function Login() {
               onClick={handleGoogleSignIn}
               className="w-full px-4 py-2 flex items-center justify-center space-x-2 text-white bg-[#192734] border-2 border-[#425568] rounded-md shadow-sm hover:bg-[#192734] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#425568]"
             >
-              <img className="h-6 w-6" src="/Icon/google.svg" alt="Google icon"/>
+              <Image src="/Icon/google.svg" alt="Google icon" width={24} height={24} />
               <span>Login with Google</span>
             </button>
             <button
