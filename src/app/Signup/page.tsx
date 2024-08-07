@@ -41,7 +41,7 @@ export default function Register() {
       {/* Background Image */}
       <div className="background-image-container">
         <Image 
-          src="/AuthImages/mountbg.jpeg" 
+          src="/mountbg.jpeg" 
           alt="Background" 
           fill 
           sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"

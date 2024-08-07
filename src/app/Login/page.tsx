@@ -29,7 +29,7 @@ export default function Login() {
     if (showForm) {
       try {
         await signInWithEmailAndPassword(auth, email, password);
-        router.push('/dashboard'); // Adjust the path as needed
+        router.push('/Dashboard'); // Adjust the path as needed
       } catch (error) {
         console.error("Error signing in with email:", error);
       }
@@ -41,7 +41,7 @@ export default function Login() {
       {/* Background Image */}
       <div className="background-image-container">
         <Image 
-          src="/AuthImages/mountbg.jpeg" 
+          src="/mountbg.jpeg" 
           alt="Background" 
           fill 
           sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 33vw"
